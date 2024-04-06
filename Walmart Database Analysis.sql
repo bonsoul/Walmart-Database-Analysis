@@ -111,6 +111,88 @@ SELECT Product_line,CAST(AVG(rating) AS DECIMAL (10,3)) Average_Rating
 FROM [WalmartSalesData.csv]
 GROUP BY Product_line
 ORDER BY Average_Rating DESC
+  
+
+
+
+--SALES
+--Number of sales made in each time of the day per weekday
+SELECT Time_Of_Date, COUNT(*) Number_of_Sales_Per_Week
+FROM [WalmartSalesData.csv]
+WHERE DAY_NAME = 'Tuesday'
+GROUP BY Time_Of_Date
+Order by Time_Of_Date DESC
+
+--Which of the customer types brings the most revenue?
+SELECT Customer_type,CAST(SUM(Total) AS DECIMAL (10,2)) Total_Revenue
+FROM [WalmartSalesData.csv]
+GROUP BY Customer_type
+
+--Which city has the largest tax percent/ VAT (Value Added Tax)?
+SELECT City,CAST(avg(Tax_5) AS DECIMAL (10,2)) Revenue
+FROM [WalmartSalesData.csv]
+GROUP BY City
+ORDER BY Revenue DESC
+
+--Which customer type pays the most in VAT?
+SELECT Customer_type,CAST(avg(Tax_5) AS DECIMAL (10,2)) Revenue
+FROM [WalmartSalesData.csv]
+GROUP BY Customer_type
+ORDER BY Revenue DESC
+
+--CUSTOMERS
+--How many unique customer types does the data have?
+SELECT DISTINCT Customer_type
+FROM [WalmartSalesData.csv]
+
+--How many unique payment methods does the data have?
+SELECT DISTINCT Payment
+FROM [WalmartSalesData.csv]
+
+--What is the most common customer type?
+SELECT Customer_type, COUNT(*) Count_
+FROM [WalmartSalesData.csv]
+GROUP BY Customer_type
+
+--What is the gender of most of the customers?
+SELECT Gender,COUNT(*) COUNT_
+FROM [WalmartSalesData.csv]
+GROUP BY Gender
+ORDER BY COUNT_ DESC
+
+--What is the gender distribution per branch?
+SELECT Gender,COUNT(*) COUNT_
+FROM [WalmartSalesData.csv]
+WHERE BRANCH = 'A'
+GROUP BY Gender
+ORDER BY COUNT_ DESC
+
+--Which time of the day do customers give most ratings?
+SELECT Time_Of_Date, CAST(AVG(rating) AS DECIMAL(10,2)) Average_Rating
+FROM [WalmartSalesData.csv]
+GROUP BY Time_Of_Date
+
+--Which time of the day do customers give most ratings per branch?
+SELECT Time_Of_Date, CAST(AVG(rating) AS DECIMAL(10,2)) Average_Rating
+FROM [WalmartSalesData.csv]
+WHERE Branch = 'C'
+GROUP BY Time_Of_Date
+
+--Which day fo the week has the best avg ratings?
+SELECT DAY_NAME,CAST(AVG(rating) AS DECIMAL(10,2)) Average_RATING
+FROM [WalmartSalesData.csv]
+GROUP BY DAY_NAME
+ORDER BY Average_RATING DESC
+
+--Which day of the week has the best average ratings per branch?
+SELECT DAY_NAME,CAST(AVG(rating) AS DECIMAL(10,2)) Average_RATING
+FROM [WalmartSalesData.csv]
+WHERE Branch = 'A'
+GROUP BY DAY_NAME
+ORDER BY Average_RATING DESC
+
+
 
 SELECT *
 FROM [WalmartSalesData.csv]
+
